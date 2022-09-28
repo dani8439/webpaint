@@ -17,14 +17,20 @@ function sizeList() {
 }
 
 /* Set Brush Size */
-function brushSize() {
-    var brushSet = document.getElementsByClassName("size");
-    Array.prototype.forEach.call(brushSet, function(element) {
-        element.addEventListener("click", function() {
-            brushthickness = element.getAttribute("style").substr(11, 2);
-        });
-    });
-}
+const brushSize = () =>
+    document.querySelectorAll(".size").forEach(element =>
+        element.addEventListener("click", () => {
+            brushthickness = element.style.getPropertyValue("--set-size");
+        }),
+    );
+// function brushSize() {
+//     var brushSet = document.getElementsByClassName("size");
+//     Array.prototype.forEach.call(brushSet, function(element) {
+//         element.addEventListener("click", function() {
+//             brushthickness = element.getAttribute("style").substr(11, 2);
+//         });
+//     });
+// }
 
 /* Set Color */
 
@@ -34,15 +40,13 @@ function setActiveColor() {
     ctx.globalCompositeOperation = "source-over";
 }
 
-function setColor() {
-    var palette = document.getElementsByClassName("color");
-    Array.prototype.forEach.call(palette, function(element) {
-        element.addEventListener("click", function() {
-            color = element.getAttribute("style").split("--set-color:")[1];
+const setColor = () =>
+    document.querySelectorAll(".color").forEach(element =>
+        element.addEventListener("click", () => {
+            color = element.style.getPropertyValue("--set-color");
             setActiveColor();
-        });
-    });
-}
+        }),
+    );
 
 function colorPick(){
     color = document.getElementById("color-picker").value;
